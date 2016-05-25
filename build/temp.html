@@ -26,10 +26,10 @@
     <link rel="icon" href="favicon.ico"><![endif]-->
         <link rel="icon" href="favicon.png">
         <!-- Specifying a Webpage Icon for Web Clip-->
-        <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="apple-touch-icon-72x72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-touch-icon-114x114-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="apple-touch-icon-144x144-precomposed.png">
+        <link rel="apple-touch-icon" href="apple-touch-icon-precomposed.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144x144.png">
         <!--*** IE compatibility ***-->
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries-->
         <!--[if lt IE 9]>
@@ -54,7 +54,19 @@
 
     <body>
         <!--Header block-->
-        <header class="header"></header>
+        <header class="header">
+            <div class="container">
+                <div class="button-boards">boards</div>
+                <form class="search"> <input type="text" class="search__input"> <input type="submit" value="search" class="search__submit"> </form>
+                <div class="logo-wrap">
+                    <div class="logo">Logo</div>
+                </div>
+                <div class="btn-create">(+)</div>
+                <div class="member">Name Surname</div>
+                <div class="button-info">(I)</div>
+                <div class="btn-notice">notice</div>
+            </div>
+        </header>
         <main></main>
         <!-- Footer block-->
         <footer class="footer"></footer>
@@ -63,6 +75,12 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
         <!-- Bootstrap-->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <!-- Angular.js-->
+        <script src="external/angular.js/angular.min.js"></script>
+        <!-- application-->
+        <script src="js/application.js"></script>
+        <!-- service -->
+        <script src="js/data.js"></script>
     </body>
 
 </html>

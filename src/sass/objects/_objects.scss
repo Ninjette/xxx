@@ -1,0 +1,46 @@
+.board{
+	border: 1px solid #000;
+	height: 100px;
+	border-radius: 3px;
+}
+.lists{
+	overflow-x: scroll;
+}
+.list{
+	display: inline-block;
+	vertical-align: top;
+	width: 275px;
+	padding: 10px;
+	border: 1px solid #000;
+	&__title{
+		display: inline-block;;
+	}
+}
+.card{
+	padding: 6px;
+	border: 1px solid #000;
+	width: 100%;
+	&__media{
+		display: block;
+		width: 100%;
+		text-align: center;
+		border: 1px solid #000;
+	}
+	&__title{
+	
+	}
+}
+.dialog{
+	border: 1px solid #000;
+	max-width:700px;
+	margin:auto;
+}
+
+.btn-elect{
+	border: 1px solid #000;
+	margin: 5px;
+}
+.btn-private{
+	margin: 5px;
+	border: 1px solid #000;
+}

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html ng-app="todoListApp">
+
+    <head>
+        <!-- *** General page information ***-->
+        <!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+        <meta charset="utf-8">
+        <title>Temp</title>
+        <!-- Mobile Specific Metas-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Template info-->
+        <meta name="author" content="">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <!-- *** Fonts ***-->
+        <!---->
+        <link rel="stylesheet" href="">
+        <!-- *** Stylesheets ***-->
+        <!---->
+        <link rel="stylesheet" href="">
+        <!-- Custom stylesheet-->
+        <link rel="stylesheet" href="css/style.css?v=1">
+        <!-- *** Favicons ***-->
+        <!--[if IE]>
+    <link rel="icon" href="favicon.ico"><![endif]-->
+        <link rel="icon" href="favicon.png">
+        <!-- Specifying a Webpage Icon for Web Clip-->
+        <link rel="apple-touch-icon" href="apple-touch-icon-precomposed.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="apple-touch-icon-144x144.png">
+        <!--*** IE compatibility ***-->
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries-->
+        <!--[if lt IE 9]>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.js"></script><![endif]-->
+        <!-- Stylesheet for IE8-9-->
+        <!--[if lte IE 9]>
+    <link href="css/ie9.css?v=1" rel="stylesheet"><![endif]-->
+        <!-- *** Opengraf ***-->
+        <meta property="og:title" content="">
+        <meta property="og:type" content="">
+        <meta property="og:image" content="">
+        <meta property="og:url" content="">
+        <meta property="og:description" content="">
+        <!-- Twitter social metas-->
+        <meta name="twitter:card" content="">
+        <meta name="twitter:site" content="">
+        <meta name="twitter:title" content="">
+        <meta name="twitter:description" content="">
+        <meta name="twitter:image" content="">
+        <meta name="twitter:url" content=""> </head>
+
+    <body>
+        <!--Header block-->
+        <header class="header">
+            <div class="container">
+                <div class="button-boards">boards</div>
+                <form class="search"> <input type="text" class="search__input"> <input type="submit" value="search" class="search__submit"> </form>
+                <div class="logo-wrap">
+                    <div class="logo">Logo</div>
+                </div>
+                <div class="btn-create">(+)</div>
+                <div class="member">Name Surname</div>
+                <div class="button-info">(I)</div>
+                <div class="btn-notice">notice</div>
+            </div>
+        </header>
+        <main>
+            <section class="section-boards">
+                <div class="container">
+                    <div class="item"><i class="item__icon"></i><span class="item__text">Elect</span></div>
+                    <div class="item"><i class="item__icon"></i><span class="item__text">My</span></div>
+                    <div class="row">
+                        <div class="col-sm-3 board">
+                            <div class="board__title">You are welcome on the board</div>
+                        </div>
+                        <div class="col-sm-3 board">
+                            <div class="board__title">Create new board...</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <hr>
+            <hr>
+            <section ng-controller="boardController" class="section-boards">
+                <div class="container">
+                    <div class="row">
+                        <div class="board-header">
+                            <h2 ng-click="editingHeading = true" ng-hide="editingHeading" class="title-secondary inline-block">{{heading}}</h2> <input ng-show="editingHeading" ng-blur="editingHeading = false" ng-model="heading"><a href="" class="btn-elect">elect btn</a><a href="" class="btn-private">private btn</a>
+                            <div class="menu">... Menu</div>
+                        </div>
+                        <div class="lists">
+                            <div ng-repeat="list in lists" class="list">
+                                <p ng-click="editing = true" ng-hide="editing" class="list__title">{{list.title}}</p> <input ng-show="editing" ng-blur="editing = false" ng-model="list.title"><a href="" class="btn-actions">...</a>
+                                <div ng-repeat="card in cards" class="card"><img src="" alt="image" class="card__media">
+                                    <p class="card__title">{{card.title}}</p>
+                                    <div class="card__badges">
+                                        <div class="attachment"><i class="attachment__icon">attach</i><span class="attachment__amount">1</span></div>
+                                        <div class="comments"><i class="comments__icon">comment</i><span class="comments__amount">1</span></div>
+                                        <div class="checkbox-block"><i class="checkbox-block__icon">checkbox</i><span class="checkbox-block__checkpoints">0/3</span></div>
+                                        <div class="date"><i class="date__icon">date</i><span class="date__day">19/</span><span class="date__month">02/</span><span class="date__year">2016</span><span class="date__expiration"></span></div>
+                                        <div class="icon-description">descr</div>
+                                        <div class="members">
+                                            <div class="members__person">img</div>
+                                        </div>
+                                    </div>
+                                </div><a href="" ng-click="addCard()" class="add-card">add card...</a> </div>
+                            <div class="add-list"><a href="" ng-click="addList()" class="add-list__elem">add list</a></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <hr>
+            <hr>
+            <div class="dialog"><img src="" alt="" class="dialog__media">
+                <h2 class="dialog__title inline-block">card name</h2><span class="dialog__own">in list #1</span>
+                <p class="dialog__decription">description</p>
+                <div class="row">
+                    <div class="dialog__content col-sm-8">
+                        <h3 class="title-secondary">attachment</h3>
+                        <h3 class="title-secondary">checklist</h3>
+                        <h3 class="title-secondary">add comment</h3>
+                        <h3 class="title-secondary">activity</h3> </div>
+                    <sidebar class="sidebar-functions col-sm-4">
+                        <h3 class="title-secondary">add</h3>
+                        <ul class="functions">
+                            <li class="functions__item"> <a href="#">members</a></li>
+                            <li class="functions__item"> <a href="#">labels</a></li>
+                            <li class="functions__item"> <a href="#">checklist</a></li>
+                            <li class="functions__item"> <a href="#">due date</a></li>
+                            <li class="functions__item"> <a href="#">attachment</a></li>
+                        </ul>
+                        <h3 class="title-secondary">actions</h3>
+                        <ul class="functions">
+                            <li class="functions__item"> <a href="#">move</a></li>
+                            <li class="functions__item"> <a href="#">copy</a></li>
+                            <li class="functions__item"> <a href="#">subscribe</a></li>
+                            <li class="functions__item"> <a href="#">archive</a></li>
+                        </ul>
+                    </sidebar>
+                </div>
+            </div>
+        </main>
+        <!-- Footer block-->
+        <footer class="footer"></footer>
+        <!-- *** Scripts ***-->
+        <!-- jQuery 1.10.1-->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <!-- Bootstrap-->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <!-- Angular.js-->
+        <script src="external/angular.js/angular.min.js"></script>
+        <!-- application-->
+        <script src="js/application.js"></script>
+        <!-- service -->
+        <script src="js/data.js"></script>
+    </body>
+
+</html>

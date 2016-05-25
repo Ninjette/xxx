@@ -64,7 +64,6 @@ img {
           border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
   display: inline-block;
   max-width: 100%;
@@ -1765,7 +1764,6 @@ output {
   -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
   transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
-  -moz-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s; }
   .form-control:focus {
@@ -2845,22 +2843,18 @@ table th[class*="col-"] {
     -webkit-transform: translate(0, -25%);
     -ms-transform: translate(0, -25%);
     -o-transform: translate(0, -25%);
-    -moz-transform: translate(0, -25%);
-         transform: translate(0, -25%);
+    transform: translate(0, -25%);
     -webkit-transition: -webkit-transform 0.3s ease-out;
-    -moz-transition: -moz-transform 0.3s ease-out;
     -o-transition: -o-transform 0.3s ease-out;
     transition: -webkit-transform 0.3s ease-out;
-    -moz-transition: transform 0.3s ease-out, -moz-transform 0.3s ease-out;
     -o-transition: transform 0.3s ease-out, -o-transform 0.3s ease-out;
     transition: transform 0.3s ease-out;
-    transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out, -moz-transform 0.3s ease-out, -o-transform 0.3s ease-out; }
+    transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out, -o-transform 0.3s ease-out; }
   .modal.in .modal-dialog {
     -webkit-transform: translate(0, 0);
     -ms-transform: translate(0, 0);
     -o-transform: translate(0, 0);
-    -moz-transform: translate(0, 0);
-         transform: translate(0, 0); }
+    transform: translate(0, 0); }
 
 .modal-open .modal {
   overflow-x: hidden;
@@ -2880,8 +2874,7 @@ table th[class*="col-"] {
           border-radius: 6px;
   -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
-  -o-background-clip: padding-box;
-     background-clip: padding-box;
+  background-clip: padding-box;
   outline: 0; }
 
 .modal-backdrop {
@@ -2957,7 +2950,6 @@ table th[class*="col-"] {
   opacity: 0;
   -webkit-transition: opacity 0.15s linear;
   -o-transition: opacity 0.15s linear;
-  -moz-transition: opacity 0.15s linear;
   transition: opacity 0.15s linear; }
   .fade.in {
     opacity: 1; }
@@ -2978,14 +2970,122 @@ tbody.collapse.in {
   height: 0;
   overflow: hidden;
   -webkit-transition-property: height, visibility;
-  -moz-transition-property: height, visibility;
   -o-transition-property: height, visibility;
   transition-property: height, visibility;
   -webkit-transition-duration: 0.35s;
-  -moz-transition-duration: 0.35s;
-    -o-transition-duration: 0.35s;
-       transition-duration: 0.35s;
+  -o-transition-duration: 0.35s;
+     transition-duration: 0.35s;
   -webkit-transition-timing-function: ease;
-  -moz-transition-timing-function: ease;
-    -o-transition-timing-function: ease;
-       transition-timing-function: ease; }
+  -o-transition-timing-function: ease;
+     transition-timing-function: ease; }
+
+.button-boards {
+  display: inline-block;
+  border: 1px solid #000; }
+
+.search {
+  display: inline-block;
+  border: 1px solid #000; }
+
+.logo-wrap {
+  display: inline-block;
+  border: 1px solid #000; }
+
+.btn-create {
+  display: inline-block;
+  border: 1px solid #000; }
+
+.member {
+  display: inline-block;
+  border: 1px solid #000; }
+
+.button-info {
+  display: inline-block;
+  border: 1px solid #000; }
+
+.btn-notice {
+  display: inline-block;
+  border: 1px solid #000; }
+
+.inline-block {
+  display: inline-block; }
+
+.menu {
+  float: right; }
+
+.add-list {
+  width: 275px;
+  padding: 10px;
+  border: 1px solid #000;
+  vertical-align: top;
+  display: inline-block; }
+
+.btn-actions {
+  border: 1px solid #000;
+  padding: 0 5px;
+  float: right; }
+
+.attachment {
+  display: inline-block;
+  border: 1px solid #000; }
+
+.comments {
+  display: inline-block;
+  border: 1px solid #000; }
+
+.checkbox-block {
+  display: inline-block;
+  border: 1px solid #000; }
+
+.date {
+  display: inline-block;
+  border: 1px solid #000; }
+
+.icon-description {
+  display: inline-block;
+  border: 1px solid #000; }
+
+.members {
+  display: inline-block;
+  border: 1px solid #000; }
+
+.board {
+  border: 1px solid #000;
+  height: 100px;
+  -webkit-border-radius: 3px;
+          border-radius: 3px; }
+
+.lists {
+  overflow-x: scroll; }
+
+.list {
+  display: inline-block;
+  vertical-align: top;
+  width: 275px;
+  padding: 10px;
+  border: 1px solid #000; }
+  .list__title {
+    display: inline-block; }
+
+.card {
+  padding: 6px;
+  border: 1px solid #000;
+  width: 100%; }
+  .card__media {
+    display: block;
+    width: 100%;
+    text-align: center;
+    border: 1px solid #000; }
+
+.dialog {
+  border: 1px solid #000;
+  max-width: 700px;
+  margin: auto; }
+
+.btn-elect {
+  border: 1px solid #000;
+  margin: 5px; }
+
+.btn-private {
+  margin: 5px;
+  border: 1px solid #000; }

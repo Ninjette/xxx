@@ -1,0 +1,106 @@
+doctype html
+html(ng-app="todoListApp")
+	head
+		- var page_name = "Temp"
+		include ./includes/head.jade
+
+	body
+		include ./includes/header.jade
+
+		main
+			section.section-boards
+				.container
+					.item
+						i.item__icon
+						span.item__text Elect
+					.item
+						i.item__icon
+						span.item__text My
+					.row
+						.col-sm-3.board
+							.board__title You are welcome on the board
+						.col-sm-3.board
+							.board__title Create new board...
+			hr
+			hr
+			section.section-boards(ng-controller="boardController")
+				.container
+					.row
+						.board-header
+							h2.title-secondary.inline-block(ng-click="editingHeading = true", ng-hide="editingHeading") {{heading}}
+							input(ng-show="editingHeading", ng-blur="editingHeading = false" ng-model="heading")
+							a(href="").btn-elect elect btn
+							a(href="").btn-private private btn
+							.menu ... Menu
+						.lists
+							.list(ng-repeat="list in lists")
+								p.list__title(ng-click="editing = true", ng-hide="editing", ) {{list.title}}
+								input(ng-show="editing", ng-blur="editing = false" ng-model="list.title")
+								a(href="").btn-actions ...
+								.card(ng-repeat="card in cards")
+									img(src="", alt="image").card__media
+									p.card__title {{card.title}}
+									.card__badges
+										.attachment
+											i.attachment__icon attach
+											span.attachment__amount 1
+										.comments
+											i.comments__icon comment
+											span.comments__amount 1
+										.checkbox-block
+											i.checkbox-block__icon checkbox
+											span.checkbox-block__checkpoints 0/3
+										.date
+											i.date__icon date
+											span.date__day 19/
+											span.date__month 02/
+											span.date__year 2016
+											span.date__expiration
+										.icon-description descr
+										.members
+											.members__person img
+								a(href="" ng-click="addCard()").add-card add card...
+							.add-list
+								a(href="", ng-click="addList()").add-list__elem add list
+			hr
+			hr
+			.dialog
+				img(src="", alt="").dialog__media
+				h2.dialog__title.inline-block card name
+				span.dialog__own in list #1
+				p.dialog__decription description
+				.row
+					.dialog__content.col-sm-8
+						h3.title-secondary attachment
+						h3.title-secondary checklist
+						h3.title-secondary add comment
+						h3.title-secondary activity
+
+					sidebar.sidebar-functions.col-sm-4
+						h3.title-secondary add
+						ul.functions
+							li.functions__item 
+								a(href="#") members
+							li.functions__item 
+								a(href="#") labels
+							li.functions__item 
+								a(href="#") checklist
+							li.functions__item 
+								a(href="#") due date
+							li.functions__item 
+								a(href="#") attachment
+						h3.title-secondary actions
+						ul.functions
+							li.functions__item 
+								a(href="#") move
+							li.functions__item 
+								a(href="#") copy
+							li.functions__item 
+								a(href="#") subscribe
+							li.functions__item 
+								a(href="#") archive
+
+
+
+
+		include ./includes/footer.jade
