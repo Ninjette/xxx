@@ -68,6 +68,73 @@
             </div>
         </header>
         <main>
+            <div ng-controller="dialogController as dialogCtrl" class="dialog"><img src="" alt="" class="dialog__media">
+                <h2 ng-hide="editTitle" ng-click="editTitle = true" class="dialog__title inline-block">{{dialogCtrl.title}}</h2> <input ng-blur="editTitle = false" ng-model="dialogCtrl.title" ng-show="editTitle" class="dialog__input"><span class="dialog__own">in list #1</span>
+                <p ng-hide="editDescription" ng-click="editDescription = true" class="dialog__decription">{{dialogCtrl.description}}</p>
+                <div class="dialog__input-wrap"> <input ng-blur="editDescription = false" ng-model="dialogCtrl.description" ng-show="editDescription" class="dialog__input"> </div>
+                <div class="row">
+                    <div class="dialog__content col-sm-8">
+                        <h3 class="title-secondary">attachment</h3>
+                        <h3 class="title-secondary">checklist</h3>
+                        <h3 class="title-secondary">add comment</h3>
+                        <div ng-controller="reviewController as reviewCtrl">
+                            <form name="reviewForm" ng-submit="reviewForm.$valid &amp;&amp; addReview(message)" novalidate class="commentary"> <textarea placeholder="write your comment" ng-model="message" required class="commentary__textarea"></textarea> <input type="submit" class="commentary__submit"> </form>
+                            <div class="preview">{{reviewCtrl.review.name}}</div>
+                            <div ng-repeat="comment in comments" class="commentaries">
+                                <blockquote class="comment">
+                                    <div class="comment__name">{{comment.name}}</div><span class="comment__text">{{comment.description}}</span> </blockquote>
+                            </div>
+                        </div>
+                        <h3 class="title-secondary">activity</h3> </div>
+                    <sidebar class="sidebar-functions col-sm-4">
+                        <h3 class="title-secondary">add</h3>
+                        <ul class="functions">
+                            <li class="functions__item"> <a href="#">members</a></li>
+                            <li class="functions__item"> <a href="#">labels</a></li>
+                            <li class="functions__item"> <a href="#">checklist</a></li>
+                            <li class="functions__item"> <a href="#">due date</a></li>
+                            <li class="functions__item"> <a href="#">attachment</a></li>
+                        </ul>
+                        <h3 class="title-secondary">actions</h3>
+                        <ul class="functions">
+                            <li class="functions__item"> <a href="#">move</a></li>
+                            <li class="functions__item"> <a href="#">copy</a></li>
+                            <li class="functions__item"> <a href="#">subscribe</a></li>
+                            <li class="functions__item"> <a href="#">archive</a></li>
+                        </ul>
+                    </sidebar>
+                    <div class="clearfix"></div>
+                    <div class="col-sm-12">
+                        <hr>
+                        <hr>
+                        <div class="popup-secondary popup-checklist">
+                            <div class="title-secondary">add checklist</div>
+                            <form class="form-checkbox">
+                                <p class="title-secondary">name</p> <input type="text" placeholder="checklist" class="input"> <input type="submit" value="add" class="form-checkbox__submit btn-primary"> </form>
+                        </div>
+                        <div class="checklist">
+                            <div class="checklist__icon">(checklist-icon)</div>
+                            <div class="title-secondary"></div>
+                            <div class="checklist-btn__wrapper"><span class="checklist__btn">hide marked</span><span class="checklist__btn">delete</span></div><span class="checklist__progress-percent">50</span><span class="checklist__sign">%</span>
+                            <div class="checklist__progress-bar-wrap">
+                                <div class="checklist__progress-bar"></div>
+                            </div>
+                            <form ng-controller="checklistController" class="checklist-form">
+                                <fieldset> <input ng-click="estimateFunc()" type="checkbox" class="checklist-form__checkbox"> <label for=""></label> <label class="checklist-form__name">name 1</label> </fieldset>
+                                <fieldset> <input ng-click="estimateFunc()" type="checkbox" class="checklist-form__checkbox"> <label for=""></label> <label class="checklist-form__name">name 2</label> </fieldset>
+                                <fieldset> <input ng-click="estimateFunc()" type="checkbox" class="checklist-form__checkbox"> <label for=""></label> <label class="checklist-form__name">name 3</label> </fieldset>
+                                <fieldset> <input ng-click="estimateFunc()" type="checkbox" class="checklist-form__checkbox"> <label for=""></label> <label class="checklist-form__name">name 3</label> </fieldset>
+                                <fieldset> <input ng-click="estimateFunc()" type="checkbox" class="checklist-form__checkbox"> <label for=""></label> <label class="checklist-form__name">name 3</label> </fieldset>
+                                <div> <button class="checklist-form__btn">add element</button> </div>
+                            </form>
+                        </div>
+                        <hr>
+                        <hr>
+                        <div class="due-date"><span class="due-date__day-week">monday</span>&nbsp;<span class="due-date__day">2</span>&nbsp;<span class="due-date__month">may</span>&nbsp;<span class="due-date__year">2016</span>&nbsp;<span>at</span>&nbsp;<span class="due-date__time">11:00</span>&nbsp;
+                            <spanspan class="due-date__status">expired</spanspan>&nbsp; </div>
+                    </div>
+                </div>
+            </div>
             <section class="section-boards">
                 <div class="container">
                     <div class="item"><i class="item__icon"></i><span class="item__text">Elect</span></div>
@@ -94,60 +161,35 @@
                         <div class="lists">
                             <div ng-repeat="list in lists" class="list">
                                 <p ng-click="editing = true" ng-hide="editing" class="list__title">{{list.title}}</p> <input ng-show="editing" ng-blur="editing = false" ng-model="list.title"><a href="" class="btn-actions">...</a>
-                                <div ng-repeat="card in cards" class="card"><img src="" alt="image" class="card__media">
-                                    <p class="card__title">{{card.title}}</p>
-                                    <div class="card__badges">
-                                        <div class="attachment"><i class="attachment__icon">attach</i><span class="attachment__amount">1</span></div>
-                                        <div class="comments"><i class="comments__icon">comment</i><span class="comments__amount">1</span></div>
-                                        <div class="checkbox-block"><i class="checkbox-block__icon">checkbox</i><span class="checkbox-block__checkpoints">0/3</span></div>
-                                        <div class="date"><i class="date__icon">date</i><span class="date__day">19/</span><span class="date__month">02/</span><span class="date__year">2016</span><span class="date__expiration"></span></div>
-                                        <div class="icon-description">descr</div>
-                                        <div class="members">
-                                            <div class="members__person">img</div>
+                                <div ng-controller="cardsController" class="cards">
+                                    <div ng-repeat="card in cards" class="card"><img src="" alt="image" class="card__media">
+                                        <p class="card__title">{{card.title}}</p>
+                                        <div class="card__badges">
+                                            <div class="attachment"><i class="attachment__icon">attach</i><span class="attachment__amount">1</span></div>
+                                            <div class="comments"><i class="comments__icon">comment</i><span class="comments__amount">1</span></div>
+                                            <div class="checkbox-block"><i class="checkbox-block__icon">checkbox</i><span class="checkbox-block__checkpoints">0/3</span></div>
+                                            <div class="date"><i class="date__icon">date</i><span class="date__day">19/</span><span class="date__month">02/</span><span class="date__year">2016</span><span class="date__expiration"></span></div>
+                                            <div class="icon-description">descr</div>
+                                            <div class="members">
+                                                <div class="members__person">img</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div><a href="" ng-click="addCard()" class="add-card">add card...</a> </div>
+                                    </div><a href="" ng-click="addCard()" class="add-card">add card...</a> </div>
+                            </div>
                             <div class="add-list"><a href="" ng-click="addList()" class="add-list__elem">add list</a></div>
                         </div>
                     </div>
                 </div>
             </section>
             <hr>
-            <hr>
-            <div class="dialog"><img src="" alt="" class="dialog__media">
-                <h2 class="dialog__title inline-block">card name</h2><span class="dialog__own">in list #1</span>
-                <p class="dialog__decription">description</p>
-                <div class="row">
-                    <div class="dialog__content col-sm-8">
-                        <h3 class="title-secondary">attachment</h3>
-                        <h3 class="title-secondary">checklist</h3>
-                        <h3 class="title-secondary">add comment</h3>
-                        <h3 class="title-secondary">activity</h3> </div>
-                    <sidebar class="sidebar-functions col-sm-4">
-                        <h3 class="title-secondary">add</h3>
-                        <ul class="functions">
-                            <li class="functions__item"> <a href="#">members</a></li>
-                            <li class="functions__item"> <a href="#">labels</a></li>
-                            <li class="functions__item"> <a href="#">checklist</a></li>
-                            <li class="functions__item"> <a href="#">due date</a></li>
-                            <li class="functions__item"> <a href="#">attachment</a></li>
-                        </ul>
-                        <h3 class="title-secondary">actions</h3>
-                        <ul class="functions">
-                            <li class="functions__item"> <a href="#">move</a></li>
-                            <li class="functions__item"> <a href="#">copy</a></li>
-                            <li class="functions__item"> <a href="#">subscribe</a></li>
-                            <li class="functions__item"> <a href="#">archive</a></li>
-                        </ul>
-                    </sidebar>
-                </div>
-            </div>
-        </main>
+            <hr> </main>
         <!-- Footer block-->
         <footer class="footer"></footer>
         <!-- *** Scripts ***-->
         <!-- jQuery 1.10.1-->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <!--jquery ui-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/i18n/jquery-ui-i18n.js"></script>
         <!-- Bootstrap-->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <!-- Angular.js-->

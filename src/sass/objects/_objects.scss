@@ -17,8 +17,9 @@
 	}
 }
 .card{
+	margin-bottom: 20px;
 	padding: 6px;
-	border: 1px solid #000;
+	border: 3px solid grey;
 	width: 100%;
 	&__media{
 		display: block;
@@ -28,6 +29,10 @@
 	}
 	&__title{
 	
+	}
+	&:hover{
+		background-color: darken(#fff, 5);
+		cursor: pointer;
 	}
 }
 .dialog{
@@ -43,4 +48,41 @@
 .btn-private{
 	margin: 5px;
 	border: 1px solid #000;
+}
+
+.commentary{
+	&__textarea{
+		width: 100%;
+		display: block;
+	}
+}
+.popup-secondary{
+	max-width: 300px;
+	border: 1px solid #000;
+}
+.checklist{
+	&__progress-bar-wrap{
+		height: 7px;
+		border-radius: 5px;
+		background-color: #D6DADC;
+		position: relative;
+		transition: all 0.45s ease-out;
+	}
+	&__progress-bar{
+		content: "";
+		transition: all 1s ease-out;
+		position: absolute;
+		left:0;
+		right:50%;
+		height: 7px;
+		background-color: #5BA4CF;
+		border-radius: 5px  0 0 5px;
+		&--accomplished{
+			background-color: green;
+		}
+	}
+
+}
+.checklist-form{
+	&__name{}
 }

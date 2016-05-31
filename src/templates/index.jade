@@ -8,6 +8,120 @@ html(ng-app="todoListApp")
 		include ./includes/header.jade
 
 		main
+			.dialog(ng-controller="dialogController as dialogCtrl")
+				img(src="", alt="").dialog__media
+				h2.dialog__title.inline-block(ng-hide="editTitle", ng-click="editTitle = true") {{dialogCtrl.title}}
+				input.dialog__input(ng-blur="editTitle = false",ng-model="dialogCtrl.title", ng-show="editTitle")
+				span.dialog__own in list #1
+				p.dialog__decription(ng-hide="editDescription", ng-click="editDescription = true") {{dialogCtrl.description}}
+				.dialog__input-wrap
+					input.dialog__input(ng-blur="editDescription = false",ng-model="dialogCtrl.description", ng-show="editDescription")
+				.row
+					.dialog__content.col-sm-8
+						h3.title-secondary attachment
+						h3.title-secondary checklist
+						h3.title-secondary add comment
+						div(ng-controller="reviewController as reviewCtrl")
+							form(name="reviewForm", ng-submit="reviewForm.$valid && addReview(message)", novalidate).commentary
+								textarea(placeholder="write your comment", ng-model="message" required).commentary__textarea
+								input(type="submit").commentary__submit
+							.preview {{reviewCtrl.review.name}}
+							.commentaries(ng-repeat="comment in comments")
+								blockquote.comment
+									.comment__name {{comment.name}}
+									span.comment__text {{comment.description}}
+
+						h3.title-secondary activity
+
+					sidebar.sidebar-functions.col-sm-4
+						h3.title-secondary add
+						ul.functions
+							li.functions__item 
+								a(href="#") members
+							li.functions__item 
+								a(href="#") labels
+							li.functions__item 
+								a(href="#") checklist
+							li.functions__item 
+								a(href="#") due date
+							li.functions__item 
+								a(href="#") attachment
+						h3.title-secondary actions
+						ul.functions
+							li.functions__item 
+								a(href="#") move
+							li.functions__item 
+								a(href="#") copy
+							li.functions__item 
+								a(href="#") subscribe
+							li.functions__item 
+								a(href="#") archive
+					.clearfix
+					.col-sm-12
+						hr
+						hr
+						.popup-secondary.popup-checklist
+							.title-secondary add checklist
+							form.form-checkbox
+								p.title-secondary name
+								input(type="text" placeholder="checklist").input
+								input(type="submit" value="add").form-checkbox__submit.btn-primary
+						.checklist
+							.checklist__icon (checklist-icon)
+							.title-secondary
+							.checklist-btn__wrapper
+								span.checklist__btn hide marked
+								span.checklist__btn delete
+							span.checklist__progress-percent 50
+							span.checklist__sign %
+							.checklist__progress-bar-wrap
+								.checklist__progress-bar
+							form.checklist-form(ng-controller="checklistController")
+								fieldset
+									input(ng-click="estimateFunc()" type="checkbox").checklist-form__checkbox
+									label(for="")
+									label.checklist-form__name name 1
+								fieldset
+									input(ng-click="estimateFunc()" type="checkbox").checklist-form__checkbox
+									label(for="")
+									label.checklist-form__name name 2
+								fieldset
+									input(ng-click="estimateFunc()" type="checkbox").checklist-form__checkbox
+									label(for="")
+									label.checklist-form__name name 3
+								fieldset
+									input(ng-click="estimateFunc()" type="checkbox").checklist-form__checkbox
+									label(for="")
+									label.checklist-form__name name 3
+								fieldset
+									input(ng-click="estimateFunc()" type="checkbox").checklist-form__checkbox
+									label(for="")
+									label.checklist-form__name name 3
+								div
+									button.checklist-form__btn add element
+						hr
+						hr
+						.due-date
+							span.due-date__day-week monday
+							&nbsp;
+							span.due-date__day 2
+							&nbsp;
+							span.due-date__month may
+							&nbsp;
+							span.due-date__year 2016
+							&nbsp;
+							span at
+							&nbsp;
+							span.due-date__time 11:00
+							&nbsp;
+							spanspan.due-date__status expired
+							&nbsp;
+
+
+
+
+
+
 			section.section-boards
 				.container
 					.item
@@ -37,68 +151,34 @@ html(ng-app="todoListApp")
 								p.list__title(ng-click="editing = true", ng-hide="editing", ) {{list.title}}
 								input(ng-show="editing", ng-blur="editing = false" ng-model="list.title")
 								a(href="").btn-actions ...
-								.card(ng-repeat="card in cards")
-									img(src="", alt="image").card__media
-									p.card__title {{card.title}}
-									.card__badges
-										.attachment
-											i.attachment__icon attach
-											span.attachment__amount 1
-										.comments
-											i.comments__icon comment
-											span.comments__amount 1
-										.checkbox-block
-											i.checkbox-block__icon checkbox
-											span.checkbox-block__checkpoints 0/3
-										.date
-											i.date__icon date
-											span.date__day 19/
-											span.date__month 02/
-											span.date__year 2016
-											span.date__expiration
-										.icon-description descr
-										.members
-											.members__person img
-								a(href="" ng-click="addCard()").add-card add card...
+								.cards(ng-controller="cardsController")
+									.card(ng-repeat="card in cards")
+										img(src="", alt="image").card__media
+										p.card__title {{card.title}}
+										.card__badges
+											.attachment
+												i.attachment__icon attach
+												span.attachment__amount 1
+											.comments
+												i.comments__icon comment
+												span.comments__amount 1
+											.checkbox-block
+												i.checkbox-block__icon checkbox
+												span.checkbox-block__checkpoints 0/3
+											.date
+												i.date__icon date
+												span.date__day 19/
+												span.date__month 02/
+												span.date__year 2016
+												span.date__expiration
+											.icon-description descr
+											.members
+												.members__person img
+									a(href="" ng-click="addCard()").add-card add card...
 							.add-list
 								a(href="", ng-click="addList()").add-list__elem add list
 			hr
 			hr
-			.dialog
-				img(src="", alt="").dialog__media
-				h2.dialog__title.inline-block card name
-				span.dialog__own in list #1
-				p.dialog__decription description
-				.row
-					.dialog__content.col-sm-8
-						h3.title-secondary attachment
-						h3.title-secondary checklist
-						h3.title-secondary add comment
-						h3.title-secondary activity
-
-					sidebar.sidebar-functions.col-sm-4
-						h3.title-secondary add
-						ul.functions
-							li.functions__item 
-								a(href="#") members
-							li.functions__item 
-								a(href="#") labels
-							li.functions__item 
-								a(href="#") checklist
-							li.functions__item 
-								a(href="#") due date
-							li.functions__item 
-								a(href="#") attachment
-						h3.title-secondary actions
-						ul.functions
-							li.functions__item 
-								a(href="#") move
-							li.functions__item 
-								a(href="#") copy
-							li.functions__item 
-								a(href="#") subscribe
-							li.functions__item 
-								a(href="#") archive
 
 
 

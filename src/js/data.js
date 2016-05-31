@@ -11,4 +11,8 @@ angular.module("todoListApp")
 		$http.get('js/lists.json')
 			.then(callback)
 	};
+	this.getComments = function(callback){
+		$http.get('js/comments.json')
+			.then(callback)
+	};
 });

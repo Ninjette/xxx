@@ -3068,14 +3068,18 @@ tbody.collapse.in {
     display: inline-block; }
 
 .card {
+  margin-bottom: 20px;
   padding: 6px;
-  border: 1px solid #000;
+  border: 3px solid grey;
   width: 100%; }
   .card__media {
     display: block;
     width: 100%;
     text-align: center;
     border: 1px solid #000; }
+  .card:hover {
+    background-color: #f2f2f2;
+    cursor: pointer; }
 
 .dialog {
   border: 1px solid #000;
@@ -3089,3 +3093,36 @@ tbody.collapse.in {
 .btn-private {
   margin: 5px;
   border: 1px solid #000; }
+
+.commentary__textarea {
+  width: 100%;
+  display: block; }
+
+.popup-secondary {
+  max-width: 300px;
+  border: 1px solid #000; }
+
+.checklist__progress-bar-wrap {
+  height: 7px;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
+  background-color: #D6DADC;
+  position: relative;
+  -webkit-transition: all 0.45s ease-out;
+  -o-transition: all 0.45s ease-out;
+  transition: all 0.45s ease-out; }
+
+.checklist__progress-bar {
+  content: "";
+  -webkit-transition: all 1s ease-out;
+  -o-transition: all 1s ease-out;
+  transition: all 1s ease-out;
+  position: absolute;
+  left: 0;
+  right: 50%;
+  height: 7px;
+  background-color: #5BA4CF;
+  -webkit-border-radius: 5px  0 0 5px;
+          border-radius: 5px  0 0 5px; }
+  .checklist__progress-bar--accomplished {
+    background-color: green; }
