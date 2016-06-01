@@ -1,4 +1,4 @@
-var app = angular.module('todoListApp',[]);
+var app = angular.module('todoListApp',[angularDragula(angular)]);
 
 app.controller('boardController',function($scope, dataService){
 	$scope.editingHeading = false;
@@ -26,6 +26,7 @@ app.controller('cardsController',function($scope, dataService){
 	$scope.addCard = function(){
 		var card = {title : "This is a new card"};
 		$scope.cards.push(card);
+		console.log($scope.cards);
 	};
 });
 
@@ -46,7 +47,6 @@ app.controller('reviewController', function($scope, dataService){
 
 app.controller('checklistController' , function($scope){
 	var amount = $('.checklist-form__checkbox').length;
-	console.log(amount);
 	var progressBar = $('.checklist__progress-bar');
 	$scope.estimateFunc = function(){
 		var checked = $('.checklist-form__checkbox:checked').length;
@@ -66,4 +66,55 @@ app.controller('checklistController' , function($scope){
 	$scope.addItem = function(){
 		console.log(1);
 	}
-})
+});
+
+$(document).ready(function(){
+	// var angularDragula = require('angular-dragula');
+
+});
+
+
+
+// dracula without angular
+// $(document).ready(function(){
+// 	// dragula([
+// 	// 	document.getElementById('left'),
+// 	// 	document.getElementById('right')
+// 	// ]);
+// 	var drake = dragula({
+// 	  isContainer: function (el) {
+// 	    return el.classList.contains('draggable');
+// 	  }
+// 	});
+// });
+
+
+//dragular test
+app.controller('RepeatCtrl', ['$scope', 'dragulaService',
+	function ($scope, dragulaService) {
+		$scope.many = ['The', 'possibilities', 'are', 'endless!'];
+		$scope.many2 = ['Explore', 'them'];
+		$scope.addItem = function(){
+			var text = {};
+			$scope.many.push(text);
+		}
+	}
+]);
+
+
+
+// angular.module("dragndropdemo", ['ngRepeatReorder']);
+// 		function dragndropdemo($scope) {
+// 			$scope.names = [{val:'bob'},{val:'lucy'},{val:'john'},{val:'luke'},{val:'han'}];
+// 			$scope.tempplayer = '';
+// 			$scope.updateNames = function (){
+// 				if($scope.tempplayer === "") return
+// 				$scope.names.push({val: $scope.tempplayer});
+// 				$scope.tempplayer = "";
+// 			};
+// 			$scope.checkForNameDelete = function($index){
+// 				if($scope.names[$index].val === ''){
+// 					$scope.names.splice($index, 1);
+// 				}
+// 			};
+// 		};

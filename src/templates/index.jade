@@ -103,19 +103,19 @@ html(ng-app="todoListApp")
 						hr
 						.due-date
 							span.due-date__day-week monday
-							&nbsp;
+							span &nbsp;
 							span.due-date__day 2
-							&nbsp;
+							span &nbsp;
 							span.due-date__month may
-							&nbsp;
+							span &nbsp;
 							span.due-date__year 2016
-							&nbsp;
+							span &nbsp;
 							span at
-							&nbsp;
+							span &nbsp;
 							span.due-date__time 11:00
-							&nbsp;
-							spanspan.due-date__status expired
-							&nbsp;
+							span &nbsp;
+							span.due-date__status expired
+							span &nbsp;
 
 
 
@@ -146,35 +146,36 @@ html(ng-app="todoListApp")
 							a(href="").btn-elect elect btn
 							a(href="").btn-private private btn
 							.menu ... Menu
-						.lists
+						.lists.draggable--------(dragula='"list-bag"')
 							.list(ng-repeat="list in lists")
 								p.list__title(ng-click="editing = true", ng-hide="editing", ) {{list.title}}
 								input(ng-show="editing", ng-blur="editing = false" ng-model="list.title")
 								a(href="").btn-actions ...
-								.cards(ng-controller="cardsController")
-									.card(ng-repeat="card in cards")
-										img(src="", alt="image").card__media
-										p.card__title {{card.title}}
-										.card__badges
-											.attachment
-												i.attachment__icon attach
-												span.attachment__amount 1
-											.comments
-												i.comments__icon comment
-												span.comments__amount 1
-											.checkbox-block
-												i.checkbox-block__icon checkbox
-												span.checkbox-block__checkpoints 0/3
-											.date
-												i.date__icon date
-												span.date__day 19/
-												span.date__month 02/
-												span.date__year 2016
-												span.date__expiration
-											.icon-description descr
-											.members
-												.members__person img
-									a(href="" ng-click="addCard()").add-card add card...
+								.cards(ng-controller="cardsController").draggable------
+									.cards-wrap(dragula='"another-bag"',dragula-scope="$parent.$parent", dragula-model="cards")
+										.card(ng-repeat="card in cards"  )
+											img(src="", alt="image").card__media
+											p.card__title {{card.title}}
+											.card__badges
+												.attachment
+													i.attachment__icon attach
+													span.attachment__amount 1
+												.comments
+													i.comments__icon comment
+													span.comments__amount 1
+												.checkbox-block
+													i.checkbox-block__icon checkbox
+													span.checkbox-block__checkpoints 0/3
+												.date
+													i.date__icon date
+													span.date__day 19/
+													span.date__month 02/
+													span.date__year 2016
+													span.date__expiration
+												.icon-description descr
+												.members
+													.members__person img
+										a(href="" ng-click="addCard()").add-card add card...
 							.add-list
 								a(href="", ng-click="addList()").add-list__elem add list
 			hr
@@ -182,5 +183,40 @@ html(ng-app="todoListApp")
 
 
 
-
 		include ./includes/footer.jade
+
+		hr
+		hr
+		hr
+
+		.dragula
+			.container
+				h1
+					| Easy Drag & Drop with 
+					a(href='https://github.com/bevacqua/dragula', target='_blank') Dragula
+					| .
+				.wrapper
+					.left()
+						div Item 1
+						div Item 2
+						div Item 3
+					.right()
+						div Item 4
+						div Item 5
+						div Item 6
+
+
+		hr
+		hr
+		hr
+		.wrapper(ng-controller="RepeatCtrl")
+			.container(dragula='"test-bag"', dragula-model='many')
+				button(ng-click="addItem()").btn-add add item
+				div(ng-repeat='text in many', ng-bind='text')
+			br
+			br
+			.container(dragula='"test-bag"', dragula-model='many2')
+				div(ng-repeat='text in many2', ng-bind='text')
+		hr
+		hr
+		hr

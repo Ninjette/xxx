@@ -3126,3 +3126,24 @@ tbody.collapse.in {
           border-radius: 5px  0 0 5px; }
   .checklist__progress-bar--accomplished {
     background-color: green; }
+
+.dragula h1 {
+  color: black; }
+
+.dragula a {
+  color: black; }
+
+.dragula .container div {
+  border: 2px solid black;
+  -webkit-border-radius: 5px;
+          border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  color: black;
+  cursor: move; }
+
+.wrapper {
+  display: table;
+  border: 1px solid #000; }
+  .wrapper div {
+    border: 1px solid #000; }

@@ -86,3 +86,41 @@
 .checklist-form{
 	&__name{}
 }
+
+
+
+
+
+//dragula
+.dragula{
+
+
+
+	h1 {
+		color: black;
+	}
+
+	a {
+		color: black;
+	}
+
+
+	.container div {
+		border: 2px solid black;
+		border-radius: 5px;
+		margin: 10px;
+		padding: 10px;
+		color: black;
+		cursor: move;
+	}
+}
+
+.wrapper{
+	display: table;
+	border: 1px solid #000;
+	div{
+		border: 1px solid #000;
+	}
+}
+
+

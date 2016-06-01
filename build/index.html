@@ -17,8 +17,7 @@
         <!---->
         <link rel="stylesheet" href="">
         <!-- *** Stylesheets ***-->
-        <!---->
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" href="external/dragula-angular/angular-dragula-master/dist/dragula.min.css">
         <!-- Custom stylesheet-->
         <link rel="stylesheet" href="css/style.css?v=1">
         <!-- *** Favicons ***-->
@@ -130,8 +129,9 @@
                         </div>
                         <hr>
                         <hr>
-                        <div class="due-date"><span class="due-date__day-week">monday</span>&nbsp;<span class="due-date__day">2</span>&nbsp;<span class="due-date__month">may</span>&nbsp;<span class="due-date__year">2016</span>&nbsp;<span>at</span>&nbsp;<span class="due-date__time">11:00</span>&nbsp;
-                            <spanspan class="due-date__status">expired</spanspan>&nbsp; </div>
+                        <div class="due-date"><span class="due-date__day-week">monday</span><span>&nbsp;</span><span class="due-date__day">2</span><span>&nbsp;</span><span class="due-date__month">may</span><span>&nbsp;</span><span class="due-date__year">2016</span><span>&nbsp;</span><span>at</span><span>&nbsp;</span>
+                            <span
+                                class="due-date__time">11:00</span><span>&nbsp;</span><span class="due-date__status">expired</span><span>&nbsp;</span></div>
                     </div>
                 </div>
             </div>
@@ -158,23 +158,25 @@
                             <h2 ng-click="editingHeading = true" ng-hide="editingHeading" class="title-secondary inline-block">{{heading}}</h2> <input ng-show="editingHeading" ng-blur="editingHeading = false" ng-model="heading"><a href="" class="btn-elect">elect btn</a><a href="" class="btn-private">private btn</a>
                             <div class="menu">... Menu</div>
                         </div>
-                        <div class="lists">
+                        <div dragula="&quot;list-bag&quot;" class="lists draggable--------">
                             <div ng-repeat="list in lists" class="list">
                                 <p ng-click="editing = true" ng-hide="editing" class="list__title">{{list.title}}</p> <input ng-show="editing" ng-blur="editing = false" ng-model="list.title"><a href="" class="btn-actions">...</a>
-                                <div ng-controller="cardsController" class="cards">
-                                    <div ng-repeat="card in cards" class="card"><img src="" alt="image" class="card__media">
-                                        <p class="card__title">{{card.title}}</p>
-                                        <div class="card__badges">
-                                            <div class="attachment"><i class="attachment__icon">attach</i><span class="attachment__amount">1</span></div>
-                                            <div class="comments"><i class="comments__icon">comment</i><span class="comments__amount">1</span></div>
-                                            <div class="checkbox-block"><i class="checkbox-block__icon">checkbox</i><span class="checkbox-block__checkpoints">0/3</span></div>
-                                            <div class="date"><i class="date__icon">date</i><span class="date__day">19/</span><span class="date__month">02/</span><span class="date__year">2016</span><span class="date__expiration"></span></div>
-                                            <div class="icon-description">descr</div>
-                                            <div class="members">
-                                                <div class="members__person">img</div>
+                                <div ng-controller="cardsController" class="cards draggable------">
+                                    <div dragula="&quot;another-bag&quot;" dragula-scope="$parent.$parent" dragula-model="cards" class="cards-wrap">
+                                        <div ng-repeat="card in cards" class="card"><img src="" alt="image" class="card__media">
+                                            <p class="card__title">{{card.title}}</p>
+                                            <div class="card__badges">
+                                                <div class="attachment"><i class="attachment__icon">attach</i><span class="attachment__amount">1</span></div>
+                                                <div class="comments"><i class="comments__icon">comment</i><span class="comments__amount">1</span></div>
+                                                <div class="checkbox-block"><i class="checkbox-block__icon">checkbox</i><span class="checkbox-block__checkpoints">0/3</span></div>
+                                                <div class="date"><i class="date__icon">date</i><span class="date__day">19/</span><span class="date__month">02/</span><span class="date__year">2016</span><span class="date__expiration"></span></div>
+                                                <div class="icon-description">descr</div>
+                                                <div class="members">
+                                                    <div class="members__person">img</div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div><a href="" ng-click="addCard()" class="add-card">add card...</a> </div>
+                                        </div><a href="" ng-click="addCard()" class="add-card">add card...</a> </div>
+                                </div>
                             </div>
                             <div class="add-list"><a href="" ng-click="addList()" class="add-list__elem">add list</a></div>
                         </div>
@@ -188,8 +190,8 @@
         <!-- *** Scripts ***-->
         <!-- jQuery 1.10.1-->
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-        <!--jquery ui-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/i18n/jquery-ui-i18n.js"></script>
+        <!-- dragula.js-->
+        <script src="external/dragula-angular/angular-dragula-master/dist/angular-dragula.min.js"></script>
         <!-- Bootstrap-->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <!-- Angular.js-->
@@ -198,6 +200,39 @@
         <script src="js/application.js"></script>
         <!-- service -->
         <script src="js/data.js"></script>
-    </body>
+        <hr>
+        <hr>
+        <hr>
+        <div class="dragula">
+            <div class="container">
+                <h1>Easy Drag & Drop with <a href="https://github.com/bevacqua/dragula" target="_blank">Dragula</a>.</h1>
+                <div class="wrapper">
+                    <div class="left">
+                        <div>Item 1</div>
+                        <div>Item 2</div>
+                        <div>Item 3</div>
+                    </div>
+                    <div class="right">
+                        <div>Item 4</div>
+                        <div>Item 5</div>
+                        <div>Item 6</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <hr>
+        <hr>
+        <div ng-controller="RepeatCtrl" class="wrapper">
+            <div dragula="&quot;test-bag&quot;" dragula-model="many" class="container"> <button ng-click="addItem()" class="btn-add">add item</button>
+                <div ng-repeat="text in many" ng-bind="text"></div>
+            </div><br><br>
+            <div dragula="&quot;test-bag&quot;" dragula-model="many2" class="container">
+                <div ng-repeat="text in many2" ng-bind="text"></div>
+            </div>
+        </div>
+        <hr>
+        <hr>
+        <hr> </body>
 
 </html>
