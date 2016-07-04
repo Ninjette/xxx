@@ -6,6 +6,10 @@ html(ng-app="todoListApp")
 
 	body
 		include ./includes/header.jade
+		//- div(ng-controller="ProfileCtrl")
+		//- 	ul
+		//- 		li(ng-repeat="message in messages") {{ message.name }}
+		//- 			button(ng-click="messages.$remove(message)") x
 
 		main
 			br
@@ -77,6 +81,7 @@ html(ng-app="todoListApp")
 								blockquote.comment
 									.comment__name {{comment.name}}
 									span.comment__text {{comment.description}}
+									button(ng-click="comments.$remove(comment)") x
 
 						h3.title-secondary activity
 

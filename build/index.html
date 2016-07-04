@@ -95,7 +95,7 @@
                             <div class="preview">{{reviewCtrl.review.name}}</div><span>snap is here {{testText}}</span>
                             <div ng-repeat="comment in comments" class="commentaries">
                                 <blockquote class="comment">
-                                    <div class="comment__name">{{comment.name}}</div><span class="comment__text">{{comment.description}}</span> </blockquote>
+                                    <div class="comment__name">{{comment.name}}</div><span class="comment__text">{{comment.description}}</span> <button ng-click="comments.$remove(comment)">x</button> </blockquote>
                             </div>
                         </div>
                         <h3 class="title-secondary">activity</h3> </div>
@@ -211,16 +211,18 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
         <!-- jquery ui-->
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <!-- Angular.js-->
+        <script src="external/angular.js/angular.min.js"></script>
         <!--firebase js-->
         <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+        <!--AngularFire-->
+        <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
         <!-- dragula.js-->
         <script src="external/dragula-angular/angular-dragula-master/dist/angular-dragula.min.js"></script>
         <!-- Bootstrap-->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <!--maskedinput-->
         <script src="external/maskedinput.min.js/maskedinput.min.js"></script>
-        <!-- Angular.js-->
-        <script src="external/angular.js/angular.min.js"></script>
         <!-- application-->
         <script src="js/application.js"></script>
         <!-- service -->

@@ -1,0 +1,31 @@
+doctype html
+html(ng-app="sampleApp")
+	head
+		- var page_name = "Temp"
+		include ./includes/head.jade
+
+	body
+		div(ng-controller="ProfileCtrl")
+			ul
+				li(ng-repeat="message in messages") {{ message.name }}
+					button(ng-click="messages.$remove(message)") x
+		//padding
+		.padding
+			img(src="images/components/padding/series_1.jpg", alt="")
+			img(src="images/components/padding/series_4.jpg", alt="")
+			img(src="images/components/padding/series_3.jpg", alt="")
+
+
+	//scripts
+	//- <!-- AngularJS -->
+	script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js")
+	//- <!-- Firebase -->
+	script(src="https://cdn.firebase.com/js/client/2.2.4/firebase.js")
+	//- <!-- AngularFire -->
+	script(src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js")
+	//- app.js
+	script(src="js/application-test.js")
+
+
+
+

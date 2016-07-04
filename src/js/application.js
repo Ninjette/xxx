@@ -1,7 +1,8 @@
-var app = angular.module('todoListApp',[angularDragula(angular)]);
-// var injector = angular.injector(["firebase", 'todoListApp']);
-
-//var app = angular.module('todoListApp',[angularDragula(angular)]); previeous line with dragula injection
+var app = angular.module('todoListApp',
+[
+	angularDragula(angular),
+	"firebase"
+]);
 
 app.controller('boardController',function($scope, dataService){
 	$scope.editingHeading = false;
@@ -37,28 +38,26 @@ app.controller('cardsController',function($scope, dataService){
 
 
 //review
-app.controller('reviewController', function($scope, dataService){
-	dataService.getComments(function(response){
-		$scope.comments = response.data;
-	});
 
-	//temporary variable, later change it on authanticated "getUID"
-	var uid = "-KLfHGnYMu4gf7qlDVZy";
-	ref.child("users/").child(uid).child('user').child('comments').on("value", function(snapshot) {
-		console.log(snapshot.val());
-	}, function (errorObject) {
-		console.log("The read failed: " + errorObject.code);
-	});
-	// this.myVar = {key:"value"};
-	$scope.addReview = function(commentText){
-		var comment = {
-			name:'name', // pass the name from google api or from authentication
-			description: commentText
+app.controller('reviewController', ["$scope", "$firebaseArray",
+	function($scope, $firebaseArray){
+		var messagesRef = new Firebase('https://task-manager-angular.firebaseio.com');
+		var uid = "-KLfHGnYMu4gf7qlDVZy";
+		$scope.comments = $firebaseArray(messagesRef.child("users/").child(uid).child('user').child('comments'));
+		$scope.addReview = function(commentText){
+			var comment = {
+				name:'name', // pass the name from google api or from authentication
+				description: commentText
+			};
+			$scope.comments.$add({
+				name:'name', // pass the name from google api or from authentication
+				description: commentText
+			});
+			$scope.comments.unshift(comment);
+			$scope.message = null;// to make field empty
 		};
-		$scope.comments.unshift(comment);
-		$scope.message = null;
-	};
-});
+	}
+]);
 
 //checklist
 app.controller('checklistController' , function($scope, dataService){
