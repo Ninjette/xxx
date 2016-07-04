@@ -8,6 +8,52 @@ html(ng-app="todoListApp")
 		include ./includes/header.jade
 
 		main
+			br
+			br
+			br
+			h3 Sign up
+			br
+			form.authentication(name="signUpForm", ng-submit="authentication()" ng-controller="authController", novalidate)
+				fieldset
+					label enter your email
+					br
+					input(type="text", placeholder="example@gmail.com" required).authentication__input.authentication__input--email
+					//- label(ng-init="myForm.lastName.$error = {}", ng-show="signUpForm.nameEmail.$error.required") Required!
+					br
+					br
+				fieldset
+					label enter your password
+					br
+					input(type="password", placeholder="******", required).authentication__input.authentication__input--password
+					br
+					br
+					input(type="submit", value="submit")
+			br
+			hr
+			h3 Sign in
+			form.sign-in(name="signInForm", ng-submit="signIn()" ng-controller="authController", novalidate)
+				fieldset
+					label enter your email
+					br
+					input(type="text", placeholder="example@gmail.com" required).sign-in__input.sign-in__input--email
+					br
+					br
+				fieldset
+					label enter your password
+					br
+					input(type="password", placeholder="******", required).sign-in__input.sign-in__input--password
+					br
+					br
+					input(type="submit", value="submit")
+			br
+			br
+			br
+			//padding
+			.padding
+				img(src="images/components/padding/series_1.jpg", alt="")
+				img(src="images/components/padding/series_4.jpg", alt="")
+				img(src="images/components/padding/series_3.jpg", alt="")
+
 			.dialog(ng-controller="dialogController as dialogCtrl")
 				img(src="", alt="").dialog__media
 				h2.dialog__title.inline-block(ng-hide="editTitle", ng-click="editTitle = true") {{dialogCtrl.title}}
@@ -26,6 +72,7 @@ html(ng-app="todoListApp")
 								textarea(placeholder="write your comment", ng-model="message" required).commentary__textarea
 								input(type="submit").commentary__submit
 							.preview {{reviewCtrl.review.name}}
+							span snap is here {{testText}}
 							.commentaries(ng-repeat="comment in comments")
 								blockquote.comment
 									.comment__name {{comment.name}}
@@ -61,7 +108,10 @@ html(ng-app="todoListApp")
 						hr
 						hr
 						.popup-secondary.popup-checklist
-							.title-secondary add checklist
+							h3.title-secondary add checklist
+							.functionality-wrapper
+								button.btn.btn-test my button
+								.hidden-block text from hidden block
 							form.form-checkbox
 								p.title-secondary name
 								input(type="text" placeholder="checklist").input
@@ -77,32 +127,23 @@ html(ng-app="todoListApp")
 							.checklist__progress-bar-wrap
 								.checklist__progress-bar
 							form.checklist-form(ng-controller="checklistController")
-								fieldset
-									input(ng-click="estimateFunc()" type="checkbox").checklist-form__checkbox
-									label(for="")
-									label.checklist-form__name name 1
-								fieldset
-									input(ng-click="estimateFunc()" type="checkbox").checklist-form__checkbox
-									label(for="")
-									label.checklist-form__name name 2
-								fieldset
-									input(ng-click="estimateFunc()" type="checkbox").checklist-form__checkbox
-									label(for="")
-									label.checklist-form__name name 3
-								fieldset
-									input(ng-click="estimateFunc()" type="checkbox").checklist-form__checkbox
-									label(for="")
-									label.checklist-form__name name 3
-								fieldset
-									input(ng-click="estimateFunc()" type="checkbox").checklist-form__checkbox
-									label(for="")
-									label.checklist-form__name name 3
+								div(ng-repeat="checklistItem in checklist")
+									fieldset
+										input(ng-click="estimateFunc()" type="checkbox").checklist-form__checkbox
+										label(for="")
+										label.checklist-form__name {{checklistItem.text}}
 								div
-									button.checklist-form__btn add element
+									button.checklist-form__btn(ng-hide="additem" ng-click="additem = 'true';") add element
+									input(type="text", ng-show="additem", placeholder="add element").checklist-form__input
+									button(ng-show="additem", ng-click="addItem()") save
 						hr
 						hr
+						div
+							|Date:
+							input.js-datepicker(type="text")
+							input.js-timepicker(type="text" placeholder="12:00")
 						.due-date
-							span.due-date__day-week monday
+							span.due-date__weekday monday
 							span &nbsp;
 							span.due-date__day 2
 							span &nbsp;
@@ -146,38 +187,40 @@ html(ng-app="todoListApp")
 							a(href="").btn-elect elect btn
 							a(href="").btn-private private btn
 							.menu ... Menu
-						.lists.draggable--------(dragula='"list-bag"')
-							.list(ng-repeat="list in lists")
-								p.list__title(ng-click="editing = true", ng-hide="editing", ) {{list.title}}
-								input(ng-show="editing", ng-blur="editing = false" ng-model="list.title")
-								a(href="").btn-actions ...
-								.cards(ng-controller="cardsController").draggable------
-									.cards-wrap(dragula='"another-bag"',dragula-scope="$parent.$parent", dragula-model="cards")
-										.card(ng-repeat="card in cards"  )
-											img(src="", alt="image").card__media
-											p.card__title {{card.title}}
-											.card__badges
-												.attachment
-													i.attachment__icon attach
-													span.attachment__amount 1
-												.comments
-													i.comments__icon comment
-													span.comments__amount 1
-												.checkbox-block
-													i.checkbox-block__icon checkbox
-													span.checkbox-block__checkpoints 0/3
-												.date
-													i.date__icon date
-													span.date__day 19/
-													span.date__month 02/
-													span.date__year 2016
-													span.date__expiration
-												.icon-description descr
-												.members
-													.members__person img
-										a(href="" ng-click="addCard()").add-card add card...
-							.add-list
-								a(href="", ng-click="addList()").add-list__elem add list
+				.lists-wrap(ng-controller="listsController")
+					.lists(dragula='"list-bag"')
+						.list(ng-repeat="list in lists")
+							span.handle ((+))
+							p.list__title(ng-click="editing = true", ng-hide="editing", ) {{list.title}}
+							input(ng-show="editing", ng-blur="editing = false" ng-model="list.title")
+							a(href="").btn-actions ...
+							.cards(ng-controller="cardsController")
+								.cards-inner-wrap(dragula='"another-bag"', dragula-scope="$parent.$parent", dragula-model="cards")
+									.card(ng-repeat="card in cards"  )
+										img(src="", alt="image").card__media
+										p.card__title {{card.title}}
+										.card__badges
+											.attachment
+												i.attachment__icon attach
+												span.attachment__amount 1
+											.comments
+												i.comments__icon comment
+												span.comments__amount 1
+											.checkbox-block
+												i.checkbox-block__icon checkbox
+												span.checkbox-block__checkpoints 0/3
+											.date
+												i.date__icon date
+												span.date__day 19/
+												span.date__month 02/
+												span.date__year 2016
+												span.date__expiration
+											.icon-description descr
+											.members
+												.members__person img
+								a(href="" ng-click="addCard()").add-card add card...
+					.add-list
+						a(href="", ng-click="addList()").add-list__elem add list
 			hr
 			hr
 
@@ -185,38 +228,46 @@ html(ng-app="todoListApp")
 
 		include ./includes/footer.jade
 
-		hr
-		hr
-		hr
 
-		.dragula
-			.container
-				h1
-					| Easy Drag & Drop with 
-					a(href='https://github.com/bevacqua/dragula', target='_blank') Dragula
-					| .
-				.wrapper
-					.left()
-						div Item 1
-						div Item 2
-						div Item 3
-					.right()
-						div Item 4
-						div Item 5
-						div Item 6
+		//- tooltips
+		//- br
+		//- br
+		//- br
+		//- br
+		//- br
+		//- .bs-example.tooltip-demo
+		//- 	.bs-example-tooltips
+		//- 		button.btn.btn-default(type='button', data-container='body', data-toggle='popover', data-placement='top', data-content='Vivamus sagittis lacus vel augue laoreet rutrum faucibus.', data-original-title='', title='') Popover on top
+		//- 		br
+		//- 		br
+		//- 		br
+		//- 		br
+		//- 		br
+		//- 		button.btn.btn-default(type='button', data-container='body', data-toggle='popover', data-placement='bottom', data-content='Vivamus sagittis lacus vel augue laoreet rutrum faucibus.', data-original-title='', title='') Popover on bottom
+		//- 		br
+		//- 		br
+		//- 		br
+		//- 		br
+		//- 		br
+		//- 		button.btn.btn-default(type='button', data-container='body', data-toggle='popover', data-placement='right', data-content='Vivamus sagittis lacus vel augue laoreet rutrum faucibus.', data-original-title='', title='') Popover on right
+		//- 		br
+
+		//- 		br
+		//- 		br
+		//- 		hr
 
 
-		hr
-		hr
-		hr
-		.wrapper(ng-controller="RepeatCtrl")
-			.container(dragula='"test-bag"', dragula-model='many')
-				button(ng-click="addItem()").btn-add add item
-				div(ng-repeat='text in many', ng-bind='text')
-			br
-			br
-			.container(dragula='"test-bag"', dragula-model='many2')
-				div(ng-repeat='text in many2', ng-bind='text')
-		hr
-		hr
-		hr
+		input#date-input(type='text', data-type='date')
+		#material-header-holder(style='display:none')
+			.ui-datepicker-material-header
+				.ui-datepicker-material-day
+				.ui-datepicker-material-date
+					.ui-datepicker-material-month
+					.ui-datepicker-material-day-num
+					.ui-datepicker-material-year
+
+		//padding
+		.padding
+			img(src="images/components/padding/series_1.jpg", alt="")
+			img(src="images/components/padding/series_4.jpg", alt="")
+			img(src="images/components/padding/series_3.jpg", alt="")

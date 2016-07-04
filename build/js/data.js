@@ -13,6 +13,10 @@ angular.module("todoListApp")
 	};
 	this.getComments = function(callback){
 		$http.get('js/comments.json')
+			.then(callback);
+	};
+	this.getChecklistItems = function(callback){
+		$http.get('js/checklist.json')
 			.then(callback)
 	};
 });

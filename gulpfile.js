@@ -24,7 +24,7 @@ var path = {
     src: {
         jade: 'src/templates/*.jade',
         sass: 'src/sass/*.scss',
-        js: 'src/js/*.js',
+        js: 'src/js/*.*',
         img: 'src/images/**/*.*',
         fonts: 'src/fonts/**/*.*',
         assets: 'src/external/**/*.*',
@@ -32,7 +32,7 @@ var path = {
     watch: {
         jade: 'src/templates/**/*.jade',
         sass: 'src/sass/**/*.scss',
-        js: 'src/js/*.js',
+        js: 'src/js/*.*',
         img: 'src/images/**/*.*',
         fonts: 'src/fonts/**/*.*',
         assets: 'src/external/**/*.*'
@@ -86,7 +86,7 @@ gulp.task('js:build', function() {
     gulp.src(path.src.js)
         .pipe(plumber())
         .pipe(gulp.dest(path.build.js));
-    return gulp.src('build/js/*.js', {
+    return gulp.src('build/js/*.*', {
             read: false
         })
         .pipe(clean())

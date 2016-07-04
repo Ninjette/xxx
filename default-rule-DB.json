@@ -1,0 +1,38 @@
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        // grants write access to the owner of this user account whose uid must exactly match the key ($uid)
+        ".write": "auth !== null && auth.uid === $uid",
+        // grants read access to any user who is logged in with an email and password
+        ".read": "auth !== null && auth.provider === 'password'"
+      }
+    }
+  }
+}
+
+
+//second example 
+{
+  "rules": {
+    "foo": {
+      // /foo/ is readable by the world
+      ".read": true,
+      // /foo/ is writable by the world
+      ".write": true,
+      // data written to /foo/ must be a string less than 100 characters
+      ".validate": "newData.isString() && newData.val().length < 100"
+    }
+  }
+}
+
+// google developer example
+{
+  "rules": {
+    "membersOnly":{
+      ".read": "auth != null",
+      ".write": "auth != null",
+      ".validate": "newData.isString()" 
+    }
+  }
+}
