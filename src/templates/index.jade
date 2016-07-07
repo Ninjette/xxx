@@ -6,11 +6,6 @@ html(ng-app="todoListApp")
 
 	body
 		include ./includes/header.jade
-		//- div(ng-controller="ProfileCtrl")
-		//- 	ul
-		//- 		li(ng-repeat="message in messages") {{ message.name }}
-		//- 			button(ng-click="messages.$remove(message)") x
-
 		main
 			br
 			br
@@ -199,9 +194,9 @@ html(ng-app="todoListApp")
 							p.list__title(ng-click="editing = true", ng-hide="editing", ) {{list.title}}
 							input(ng-show="editing", ng-blur="editing = false" ng-model="list.title")
 							a(href="").btn-actions ...
-							.cards(ng-controller="cardsController")
+							.cards
 								.cards-inner-wrap(dragula='"another-bag"', dragula-scope="$parent.$parent", dragula-model="cards")
-									.card(ng-repeat="card in cards"  )
+									.card(ng-repeat="card in list.cards")
 										img(src="", alt="image").card__media
 										p.card__title {{card.title}}
 										.card__badges
@@ -223,7 +218,7 @@ html(ng-app="todoListApp")
 											.icon-description descr
 											.members
 												.members__person img
-								a(href="" ng-click="addCard()").add-card add card...
+								a(href="" ng-click="addCard(list)").add-card add card...
 					.add-list
 						a(href="", ng-click="addList()").add-list__elem add list
 			hr

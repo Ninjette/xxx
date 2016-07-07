@@ -181,9 +181,9 @@
                     <div dragula="&quot;list-bag&quot;" class="lists">
                         <div ng-repeat="list in lists" class="list"><span class="handle">((+))</span>
                             <p ng-click="editing = true" ng-hide="editing" class="list__title">{{list.title}}</p> <input ng-show="editing" ng-blur="editing = false" ng-model="list.title"><a href="" class="btn-actions">...</a>
-                            <div ng-controller="cardsController" class="cards">
+                            <div class="cards">
                                 <div dragula="&quot;another-bag&quot;" dragula-scope="$parent.$parent" dragula-model="cards" class="cards-inner-wrap">
-                                    <div ng-repeat="card in cards" class="card"><img src="" alt="image" class="card__media">
+                                    <div ng-repeat="card in list.cards" class="card"><img src="" alt="image" class="card__media">
                                         <p class="card__title">{{card.title}}</p>
                                         <div class="card__badges">
                                             <div class="attachment"><i class="attachment__icon">attach</i><span class="attachment__amount">1</span></div>
@@ -196,7 +196,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div><a href="" ng-click="addCard()" class="add-card">add card...</a> </div>
+                                </div><a href="" ng-click="addCard(list)" class="add-card">add card...</a> </div>
                         </div>
                     </div>
                     <div class="add-list"><a href="" ng-click="addList()" class="add-list__elem">add list</a></div>

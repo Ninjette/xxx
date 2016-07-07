@@ -4,18 +4,39 @@ var app = angular.module('todoListApp',
 	"firebase"
 ]);
 
-app.controller('boardController',function($scope, dataService){
-	$scope.editingHeading = false;
-	$scope.heading = "You are welcome on the board";
-	$scope.editing = false;
-	dataService.getLists(function(response){
-		$scope.lists = response.data;
-	});
-	$scope.addList = function(){
-		var list = {title : "This is a new card"};
-		$scope.lists.push(list);
-	};
-});
+app.controller('boardController',['$scope', '$firebaseArray',
+	function($scope, $firebaseArray){
+		$scope.editingHeading = false;
+		$scope.heading = "You are welcome on the board";
+		$scope.editing = false;
+
+		var uid = "-KLfHGnYMu4gf7qlDVZy";
+		var ref = new Firebase('https://task-manager-angular.firebaseio.com');
+		$scope.lists = $firebaseArray(ref.child("users/").child(uid).child('user').child('lists'));
+		$scope.addList = function(){
+			$scope.lists.$add({
+				title : "This is a new list",
+				cards : [{
+					exampleKey: "exampleValue"
+				}]
+			});
+			console.log('created');
+		};
+
+		//cards code
+		var ref = new Firebase('https://task-manager-angular.firebaseio.com');
+		var uid = "-KLfHGnYMu4gf7qlDVZy";
+		// $scope.cards = $firebaseArray(ref.child("users/").child(uid).child('user').child('lists').child('0').child('cards'));
+	
+		$scope.addCard = function(objectInfo){
+			console.log(objectInfo.$id);
+			$scope.currentList = $firebaseArray(ref.child("users/").child(uid).child('user').child('lists').child(objectInfo.$id).child('cards'));
+			$scope.currentList.$add({
+				title: "This is a new card with array number "+objectInfo
+			});
+		};
+	}
+]);
 
 app.controller('dialogController', function(){
 	this.editDescription = false;
@@ -25,25 +46,34 @@ app.controller('dialogController', function(){
 
 
 //cards
-app.controller('cardsController',function($scope, dataService){
-	dataService.getCards(function(response){
-		$scope.cards = response.data;
-	});
-	$scope.addCard = function(){
-		var card = {title : "This is a new card"};
-		$scope.cards.push(card);
-		console.log($scope.cards);
-	};
-});
+app.controller('cardsController',['$scope','$firebaseArray',
+	function($scope, $firebaseArray){
+		// var ref = new Firebase('https://task-manager-angular.firebaseio.com');
+		// var uid = "-KLfHGnYMu4gf7qlDVZy";
+		// $scope.cards = $firebaseArray(ref.child("users/").child(uid).child('user').child('lists').child('0').child('cards'));
+		// ref.once("value", function(snapshot) {
+		// 	var a = snapshot.child("users").child(uid).child('user').child('lists').numChildren();
+		// 	// console.log(a);
+		// });
+		// // dataService.getCards(function(response){
+		// // 	$scope.cards = response.data;
+		// // });
+		// $scope.addCard = function(){
+		// 	$scope.cards.$add({
+		// 		title: "This is a new card"
+		// 	});
+		// 	// console.log($scope.cards);
+		// };
+	}
+]);
 
 
 //review
-
 app.controller('reviewController', ["$scope", "$firebaseArray",
 	function($scope, $firebaseArray){
-		var messagesRef = new Firebase('https://task-manager-angular.firebaseio.com');
+		var ref = new Firebase('https://task-manager-angular.firebaseio.com');
 		var uid = "-KLfHGnYMu4gf7qlDVZy";
-		$scope.comments = $firebaseArray(messagesRef.child("users/").child(uid).child('user').child('comments'));
+		$scope.comments = $firebaseArray(ref.child("users/").child(uid).child('user').child('comments'));
 		$scope.addReview = function(commentText){
 			var comment = {
 				name:'name', // pass the name from google api or from authentication
