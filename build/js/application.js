@@ -4,23 +4,104 @@ var app = angular.module('todoListApp',
 	"firebase"
 ]);
 
-app.controller('boardController',['$scope', '$firebaseArray',
-	function($scope, $firebaseArray){
+app.controller('boardController',['$scope', '$firebaseArray', 'dragulaService',
+	function($scope, $firebaseArray, dragulaService){
 		$scope.editingHeading = false;
 		$scope.heading = "You are welcome on the board";
 		$scope.editing = false;
 
 		var uid = "-KLfHGnYMu4gf7qlDVZy";
 		var ref = new Firebase('https://task-manager-angular.firebaseio.com');
+
+		dragulaService.options($scope, 'list-bag', {
+			moves: function (el, container, handle) {
+				return handle.className === 'handle';
+			},
+			direction: 'horizontal'
+		});
+
 		$scope.lists = $firebaseArray(ref.child("users/").child(uid).child('user').child('lists'));
+		//list on drag
+		var lastDraggedId;
+		var listData;
+
+		$scope.$on('list-bag.drag', function (e, el) {
+			// lastDragged = el;
+			var elementIndex = el.index();
+			lastDraggedId = $scope.lists[elementIndex].$id;
+			console.log(lastDraggedId,'lastDragged');
+
+			var refToList = ref.child("users/").child(uid).child('user').child('lists').child(lastDraggedId);
+			refToList.once("value", function(snapshot) {
+				listData = snapshot.val();
+				console.log(listData , ' listData');
+			});	
+			// var snapshot = $(this).snapshot 
+
+		});
+		$scope.$on('list-bag.drop', function (e, el) {
+			console.log('dropped');
+			el.addClass('list-moved');
+			var elementIndex = el.index();
+			console.log(elementIndex);
+			var idOfCurrentList = $scope.lists[elementIndex].$id
+
+
+			//last code 
+			// $scope.addList = function(){
+			$scope.lists.$add({
+				// listData tried to add this snapshot right into the lists . Still didn't work even correct code (nunderneith)
+				title : "This is a new list"
+			});
+			// };
+
+
+
+
+			//black code
+			// linkForSnapshot = $firebaseArray(ref.child("users/").child(uid).child('user').child('lists').child(idOfCurrentList));
+
+			// var testData = $firebaseArray(ref.child("users/").child(uid).child('user').child('lists').child(idOfCurrentList));
+			// console.log(testData, 'testData from firbaseArray');
+			// console.log(ref.child("users/").child(uid).child('user').child('lists').child(idOfCurrentList));
+			//.remove()
+			// messages.$remove(message)
+
+
+			//working code
+			// var refToList = ref.child("users/").child(uid).child('user').child('lists').child(idOfCurrentList);
+			// refToList.once("value", function(snapshot) {
+			// 	var listData = snapshot.val();
+			// 	console.log(listData , ' listData');
+			// });
+		});
+
+		// $scope.$on('list-bag.drop', function (e, el) {
+		// 	console.log('drop');
+		// });
+		// $scope.focusFunc = function(el){
+		// 	console.log('focusFunc');
+		// 	$scope.lists.$remove(el);
+		// }
+
+		// var ref = new Firebase("https://docs-examples.firebaseio.com/samplechat/users/fred");
+
+
+		// linkToLists = $firebaseArray(ref.child("users/").child(uid).child('user').child('lists'));
+		// linkToLists.once("value", function(snapshot) {
+		// 	var data = snapshot.val();
+		// 	// data equals { "name": { "first": "Fred", "last": "Flintstone" }, "age": 53 }
+		// 	// console.log(data.name.first);  // "Fred"
+		// 	// console.log(data.age);  // 53
+		// 	console.log(data);
+		// });
+
+
+
 		$scope.addList = function(){
 			$scope.lists.$add({
-				title : "This is a new list",
-				cards : [{
-					exampleKey: "exampleValue"
-				}]
+				title : "This is a new list"
 			});
-			console.log('created');
 		};
 
 		//cards code
@@ -29,7 +110,6 @@ app.controller('boardController',['$scope', '$firebaseArray',
 		// $scope.cards = $firebaseArray(ref.child("users/").child(uid).child('user').child('lists').child('0').child('cards'));
 	
 		$scope.addCard = function(objectInfo){
-			console.log(objectInfo.$id);
 			$scope.currentList = $firebaseArray(ref.child("users/").child(uid).child('user').child('lists').child(objectInfo.$id).child('cards'));
 			$scope.currentList.$add({
 				title: "This is a new card with array number "+objectInfo
@@ -43,30 +123,6 @@ app.controller('dialogController', function(){
 	this.description = "description";
 	this.title = "title";
 });
-
-
-//cards
-app.controller('cardsController',['$scope','$firebaseArray',
-	function($scope, $firebaseArray){
-		// var ref = new Firebase('https://task-manager-angular.firebaseio.com');
-		// var uid = "-KLfHGnYMu4gf7qlDVZy";
-		// $scope.cards = $firebaseArray(ref.child("users/").child(uid).child('user').child('lists').child('0').child('cards'));
-		// ref.once("value", function(snapshot) {
-		// 	var a = snapshot.child("users").child(uid).child('user').child('lists').numChildren();
-		// 	// console.log(a);
-		// });
-		// // dataService.getCards(function(response){
-		// // 	$scope.cards = response.data;
-		// // });
-		// $scope.addCard = function(){
-		// 	$scope.cards.$add({
-		// 		title: "This is a new card"
-		// 	});
-		// 	// console.log($scope.cards);
-		// };
-	}
-]);
-
 
 //review
 app.controller('reviewController', ["$scope", "$firebaseArray",
@@ -118,16 +174,28 @@ app.controller('checklistController' , function($scope, dataService){
 	}
 });
 
-app.controller('listsController', ['$scope', 'dragulaService',
-	function ($scope, dragulaService) {
-		dragulaService.options($scope, 'list-bag', {
-			moves: function (el, container, handle) {
-			  return handle.className === 'handle';
-			},
-			direction: 'horizontal'
-		});
-	}
-]);
+// app.controller('listsController', ['$scope', 'dragulaService',
+// 	function ($scope, dragulaService) {
+// 		dragulaService.options($scope, 'list-bag', {
+// 			moves: function (el, container, handle) {
+// 				return handle.className === 'handle';
+// 			},
+// 			direction: 'horizontal'
+// 		});
+// 		$scope.$on('list-bag.drag', function (e, el) {
+// 			el.addClass('list-moved');
+// 			console.log($scope.lists)
+// 			console.log(el.index())
+// 		});
+
+// 		// $scope.$on('another-bag.drop', function (e, el) {
+// 		// 	el.addClass('card-moved');
+// 		// 	alert('moved');
+// 		// });
+
+// 	}
+// ]);
+
 
 // tool tips
 $(document).ready(function(){

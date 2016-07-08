@@ -177,7 +177,7 @@
                         </div>
                     </div>
                 </div>
-                <div ng-controller="listsController" class="lists-wrap">
+                <div class="lists-wrap">
                     <div dragula="&quot;list-bag&quot;" class="lists">
                         <div ng-repeat="list in lists" class="list"><span class="handle">((+))</span>
                             <p ng-click="editing = true" ng-hide="editing" class="list__title">{{list.title}}</p> <input ng-show="editing" ng-blur="editing = false" ng-model="list.title"><a href="" class="btn-actions">...</a>

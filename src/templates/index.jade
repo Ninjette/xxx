@@ -187,7 +187,7 @@ html(ng-app="todoListApp")
 							a(href="").btn-elect elect btn
 							a(href="").btn-private private btn
 							.menu ... Menu
-				.lists-wrap(ng-controller="listsController")
+				.lists-wrap
 					.lists(dragula='"list-bag"')
 						.list(ng-repeat="list in lists")
 							span.handle ((+))
