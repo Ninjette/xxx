@@ -1,0 +1,11 @@
+{
+    "rules": {
+        ".read": true,
+        ".write": true
+    }
+}
+
+//app ID 1750242825251480
+//app secret 68752931f7d3535bb76f537e58707556
+
+https://auth.firebase.com/v2/task-manager-angular/auth/facebook/callback
