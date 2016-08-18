@@ -67,6 +67,9 @@
                 <div class="btn-notice">notice</div>
             </div>
         </header>
+        <!--test code delete this-->
+        <hr>
+        <hr>
         <main><br><br><br>
             <h3>Sign up</h3><br>
             <form name="signUpForm" ng-submit="authentication()" ng-controller="authController" novalidate class="authentication">
@@ -80,7 +83,7 @@
                 <fieldset> <label>enter your password</label><br> <input type="password" placeholder="******" required class="sign-in__input sign-in__input--password"><br><br> <input type="submit" value="submit"> </fieldset>
             </form><br><br><br>
             <!--padding-->
-            <!-- <div class="padding"><img src="images/components/padding/series_1.jpg" alt=""><img src="images/components/padding/series_4.jpg" alt=""><img src="images/components/padding/series_3.jpg" alt=""></div> -->
+            <div class="padding"><img src="images/components/padding/series_1.jpg" alt=""><img src="images/components/padding/series_4.jpg" alt=""><img src="images/components/padding/series_3.jpg" alt=""></div>
             <div ng-controller="dialogController as dialogCtrl" class="dialog"><img src="" alt="" class="dialog__media">
                 <h2 ng-hide="editTitle" ng-click="editTitle = true" class="dialog__title inline-block">{{dialogCtrl.title}}</h2> <input ng-blur="editTitle = false" ng-model="dialogCtrl.title" ng-show="editTitle" class="dialog__input"><span class="dialog__own">in list #1</span>
                 <p ng-hide="editDescription" ng-click="editDescription = true" class="dialog__decription">{{dialogCtrl.description}}</p>
@@ -169,6 +172,7 @@
             <hr>
             <hr>
             <section ng-controller="boardController" class="section-boards">
+                <div class="magic-btn">magic button</div>
                 <div class="container">
                     <div class="row">
                         <div class="board-header">
@@ -182,7 +186,7 @@
                         <div ng-repeat="list in lists" class="list"><span class="handle">((+))</span>
                             <p ng-click="editing = true" ng-hide="editing" class="list__title">{{list.title}}</p> <input ng-show="editing" ng-blur="editing = false" ng-model="list.title"><a href="" class="btn-actions">...</a>
                             <div class="cards">
-                                <div dragula="&quot;another-bag&quot;" dragula-scope="$parent.$parent" dragula-model="cards" class="cards-inner-wrap">
+                                <div dragula="&quot;card-bag&quot;" dragula-scope="$parent.$parent" dragula-model="cards" class="cards-inner-wrap">
                                     <div ng-repeat="card in list.cards" class="card"><img src="" alt="image" class="card__media">
                                         <p class="card__title">{{card.title}}</p>
                                         <div class="card__badges">
@@ -223,10 +227,18 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <!--maskedinput-->
         <script src="external/maskedinput.min.js/maskedinput.min.js"></script>
-        <!-- application-->
-        <script src="js/application.js"></script>
-        <!-- service -->
-        <script src="js/data.js"></script> <input id="date-input" type="text" data-type="date">
+        <!--module-->
+        <script src="js/module.js"></script>
+        <!--controllers-->
+        <script src="js/boardController.js"></script>
+        <script src="js/dialogController.js"></script>
+        <script src="js/reviewController.js"></script>
+        <script src="js/checklistController.js"></script>
+        <script src="js/authController.js"></script>
+        <!-- services-->
+        <script src="js/data.js"></script>
+        <!--application-->
+        <script src="js/application.js"></script> <input id="date-input" type="text" data-type="date">
         <div id="material-header-holder" style="display:none">
             <div class="ui-datepicker-material-header">
                 <div class="ui-datepicker-material-day"></div>
@@ -238,7 +250,7 @@
             </div>
         </div>
         <!--padding-->
-        <!-- <div class="padding"><img src="images/components/padding/series_1.jpg" alt=""><img src="images/components/padding/series_4.jpg" alt=""><img src="images/components/padding/series_3.jpg" alt=""></div> -->
+        <div class="padding"><img src="images/components/padding/series_1.jpg" alt=""><img src="images/components/padding/series_4.jpg" alt=""><img src="images/components/padding/series_3.jpg" alt=""></div>
     </body>
 
 </html>

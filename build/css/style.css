@@ -3050,6 +3050,23 @@ tbody.collapse.in {
   display: inline-block;
   border: 1px solid #000; }
 
+.col-sm-6 {
+  border: 1px solid grey;
+  cursor: pointer; }
+
+.magic-btn {
+  border: 1px solid #000;
+  display: inline-block;
+  background-color: grey;
+  color: #fff;
+  width: 200px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer; }
+  .magic-btn:active {
+    background-color: #e0e0e0; }
+
 .board {
   border: 1px solid #000;
   height: 100px;

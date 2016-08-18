@@ -6,6 +6,17 @@ html(ng-app="todoListApp")
 
 	body
 		include ./includes/header.jade
+		//test code delete this
+		hr
+		//- .wrapper(ng-controller="RepeatCtrl")
+		//- 	.col-sm-6.container(dragula='"another-bag"', dragula-model='many')
+		//- 		div(ng-repeat='text in many', ng-bind='text')
+		//- 			p {{text.title}}
+		//- 	.col-sm-6.container(dragula='"another-bag"', dragula-model='many2')
+		//- 		div(ng-repeat='text in many2', ng-bind='text')
+		//- 			p {{text.title}}
+		hr
+
 		main
 			br
 			br
@@ -179,6 +190,7 @@ html(ng-app="todoListApp")
 			hr
 			hr
 			section.section-boards(ng-controller="boardController")
+				.magic-btn magic button
 				.container
 					.row
 						.board-header
@@ -195,7 +207,7 @@ html(ng-app="todoListApp")
 							input(ng-show="editing", ng-blur="editing = false" ng-model="list.title")
 							a(href="").btn-actions ...
 							.cards
-								.cards-inner-wrap(dragula='"another-bag"', dragula-scope="$parent.$parent", dragula-model="cards")
+								.cards-inner-wrap(dragula='"card-bag"', dragula-scope="$parent.$parent", dragula-model="cards")
 									.card(ng-repeat="card in list.cards")
 										img(src="", alt="image").card__media
 										p.card__title {{card.title}}

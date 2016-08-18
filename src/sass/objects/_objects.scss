@@ -1,3 +1,23 @@
+//test code delete this
+.col-sm-6{
+	border: 1px solid grey;
+	cursor: pointer;
+}
+.magic-btn{
+	border: 1px solid #000;
+	display: inline-block;
+	background-color: grey;
+	color: #fff;
+	width: 200px;
+	height: 40px;
+	text-align: center;
+	line-height: 40px;
+	cursor: pointer;
+	&:active{
+		background-color: #e0e0e0;
+	}
+}
+//test code delete this
 .board{
 	border: 1px solid #000;
 	height: 100px;
@@ -19,7 +39,7 @@
 	width: 275px;
 	border: 1px solid #000;
 	&__title{
-		display: inline-block;;
+		display: inline-block;
 	}
 }
 .card{
